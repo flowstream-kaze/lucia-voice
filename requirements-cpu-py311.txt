@@ -1,0 +1,17 @@
+# CPU Kokoro TTS backend — Python 3.11. Identical to requirements-cpu.txt except
+# numpy: 2.5.3 requires Python >=3.12, so 3.11 takes the newest 2.4.x.
+# Measured working on Debian x86-64 / Python 3.11: assets verified, model warmed,
+# synthesis produced valid non-silent mono 24 kHz PCM16.
+attrs==26.1.0
+cloudpickle==3.1.2
+dlinfo==2.0.0
+espeakng-loader==0.2.4
+flatbuffers==25.12.19
+joblib==1.6.0
+kokoro-onnx==0.6.1
+numpy==2.4.6
+onnxruntime==1.30.0
+packaging==26.3
+phonemizer==3.4.0
+protobuf==7.36.2
+typing_extensions==4.16.0

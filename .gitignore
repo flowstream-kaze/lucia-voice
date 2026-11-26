@@ -1,0 +1,7 @@
+# Weights and audio are fetched or generated, never committed.
+*.onnx
+*.bin
+*.part
+*.wav
+__pycache__/
+venv/
