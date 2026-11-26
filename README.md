@@ -1,6 +1,6 @@
 # Lucia's voice — a Kokoro-82M blend, and how to rebuild it
 
-**`bf_emma50_lily50`** — the default voice of the Pi assistant "Lucia": an equal-weight
+**`bf_emma50_lily50`** — Lucia's **Kokoro** voice: an equal-weight
 interpolation of two official Kokoro voice banks (`bf_emma` + `bf_lily`), British English,
 speed 1.0, running on **Kokoro-82M v1.0** on CPU. Nothing is trained, fine-tuned or cloned:
 the voice is two published Apache-2.0 voice banks and one average.
@@ -9,6 +9,30 @@ This repo is the reference for **what the voice is** and **how to stand it up on
 machine**. The HTTP server that serves it on the LAN lives in the Pi repository at
 `integrations/voice/tts/` (`tts_server.py`); everything here is the voice identity, the
 pinned weights, and the steps.
+
+## Engines and names — read this first if you came from the app
+
+One shared speech service fronts several engines, and each keeps its own default in
+`C:\AI\VoiceChat\voices\settings.json`. Switching engine takes 15-40 s from the Voices page.
+
+| engine | its default voice |
+| --- | --- |
+| `clone` — Qwen3-TTS 1.7B Base (cloned or designed voices) | `warm_british_1` |
+| `clone-fast` — Qwen3-TTS 12Hz 0.6B Base | `warm_british_1` |
+| `preset` — Qwen3-TTS 1.7B CustomVoice (nine studio speakers, style control) | `serena` |
+| `kokoro` — **Kokoro-82M v1.0** | **`bf_emma50_lily50`** — this repo |
+| `breeze` — Breeze-TTS-2 3B, directorable (non-commercial licence) | `b-warm_british_1` |
+
+**`warm_british_1` is not a Kokoro voice** and cannot be handed to Kokoro. It is an original
+voice designed with Qwen3-TTS VoiceDesign — its folder holds a `voice.json` with the design
+prompt, a description and a seed (20261010) — and the Kokoro bank has no such name: all 54
+entries follow `<language><gender>_<name>` (`af_`, `bf_`, `bm_`, …), so any other name is an
+app-side label. As of this writing it is also what the assistant actually speaks: `/health`
+on the shared service reports `qwen3-tts-clone-cuda` / `warm_british_1`, while the Kokoro
+table still describes `bf_emma50_lily50` as "Pi's original voice" — which is exactly what it
+is: where Lucia's voice started, on the engine that is no longer selected by default. This
+repo documents that Kokoro side, the part reproducible from public weights — not necessarily
+the voice you hear today.
 
 ## How the blend was achieved
 
